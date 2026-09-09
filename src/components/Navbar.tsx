@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
-import { Search, Menu, X, Brain, Users, Database, Mail, Home, Download } from 'lucide-react';
+import { Search, Menu, X, Brain, Users, Database, Mail, Home } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;
@@ -16,71 +16,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   setCurrentTab,
   lang,
   setLang,
-  onOpenDeployGuide,
   onSearchOpen
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
-
-  const handleDownloadHtml = async () => {
-    try {
-      setIsDownloading(true);
-      // Fetch the latest standalone HTML
-      const res = await fetch('/standalone.html?t=' + Date.now());
-      if (!res.ok) throw new Error('Failed to fetch standalone HTML');
-      let html = await res.text();
-
-      // Collect all custom user uploaded photos and custom configurations from localStorage
-      const customData: Record<string, string> = {};
-      try {
-        for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-          if (key && (key.startsWith('feigao_') || key.startsWith('app_'))) {
-            const val = localStorage.getItem(key);
-            if (val) customData[key] = val;
-          }
-        }
-      } catch (e) {
-        console.error('Failed reading localStorage', e);
-      }
-
-      // Inject custom preloaded data directly into HTML
-      const injectedScript = `
-<script>
-window.__PRELOADED_FEIGAO_DATA__ = ${JSON.stringify(customData)};
-try {
-  for (var k in window.__PRELOADED_FEIGAO_DATA__) {
-    try {
-      localStorage.setItem(k, window.__PRELOADED_FEIGAO_DATA__[k]);
-    } catch(e) {}
-  }
-} catch(e) {}
-</script>
-`;
-
-      if (html.includes('</head>')) {
-        html = html.replace('</head>', `${injectedScript}</head>`);
-      } else {
-        html = injectedScript + html;
-      }
-
-      // Trigger file download
-      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Reading_Bilingualism_Brain_Lab.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    } catch (err) {
-      console.error('Download error:', err);
-      window.open('/standalone.html', '_blank');
-    } finally {
-      setIsDownloading(false);
-    }
-  };
 
   const navItems = [
     { id: 'home', labelEn: 'Home', labelZh: '首页', icon: Home },
@@ -148,21 +86,10 @@ try {
             {/* Search Button */}
             <button
               onClick={onSearchOpen}
-              className="p-2 text-gray-600 hover:text-[#1b365d] hover:bg-gray-100 rounded-md transition-colors"
+              className="p-2 text-gray-600 hover:text-[#1b365d] hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
               title={lang === 'en' ? 'Search publications & news' : '搜索论文与动态'}
             >
               <Search size={19} />
-            </button>
-
-            {/* Direct Download Standalone HTML */}
-            <button
-              onClick={handleDownloadHtml}
-              disabled={isDownloading}
-              className="px-2.5 py-1.5 bg-[#236869] hover:bg-[#1a5152] disabled:opacity-60 text-white text-xs font-semibold rounded-md transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
-              title={lang === 'en' ? 'Download full website with all uploaded photos embedded' : '下载包含已上传照片的完整离线单文件 HTML'}
-            >
-              <Download size={14} className={isDownloading ? 'animate-bounce' : ''} />
-              <span>{isDownloading ? (lang === 'en' ? 'Packaging...' : '打包中...') : (lang === 'en' ? 'Download HTML' : '下载单文件HTML')}</span>
             </button>
 
             {/* Language Switch Toggle */}
@@ -231,18 +158,10 @@ try {
             );
           })}
           
-          <div className="pt-2 border-t border-gray-100 space-y-2">
-            <button
-              onClick={handleDownloadHtml}
-              disabled={isDownloading}
-              className="w-full py-2 bg-[#236869] text-white text-xs font-semibold rounded-md flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
-            >
-              <Download size={15} className={isDownloading ? 'animate-bounce' : ''} />
-              {isDownloading ? (lang === 'en' ? 'Packaging HTML...' : '打包下载中...') : (lang === 'en' ? 'Download Standalone HTML' : '下载完整单文件 HTML')}
-            </button>
+          <div className="pt-2 border-t border-gray-100">
             <button
               onClick={onSearchOpen}
-              className="w-full py-2 bg-gray-100 text-gray-800 text-xs font-semibold rounded-md flex items-center justify-center gap-1.5"
+              className="w-full py-2 bg-gray-100 text-gray-800 text-xs font-semibold rounded-md flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <Search size={15} />
               {lang === 'en' ? 'Search Site' : '搜索内容'}
