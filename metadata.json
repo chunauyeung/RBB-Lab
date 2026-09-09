@@ -1,0 +1,6 @@
+{
+  "name": "Reading, Bilingualism, and Brain Lab",
+  "description": "Bilingual academic website for Reading, Bilingualism, and Brain Lab (阅读、双语与大脑实验室) featuring research, team profiles, open datasets, and news.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
