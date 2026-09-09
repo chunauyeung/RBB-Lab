@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Mail, GraduationCap, Award, ExternalLink, User, Upload, Camera, RotateCcw } from 'lucide-react';
+import { Mail, GraduationCap, Award, ExternalLink, User, Upload, Camera, RotateCcw, Crop } from 'lucide-react';
 import { Language } from '../types';
 import { TEAM_MEMBERS } from '../data/mockData';
+import { ImageCropModal } from '../components/ImageCropModal';
 
 interface TeamPageProps {
   lang: Language;
@@ -13,6 +14,11 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
   const graduates = TEAM_MEMBERS.filter(m => m.category === 'graduate');
   const undergraduates = TEAM_MEMBERS.filter(m => m.category === 'undergraduate');
   const alumni = TEAM_MEMBERS.filter(m => m.category === 'alumni');
+
+  // Crop modal state
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+  const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
+  const [activeCropMemberId, setActiveCropMemberId] = useState<string | null>(null);
 
   // Manage avatars for all team members by ID
   const [memberAvatars, setMemberAvatars] = useState<Record<string, string>>(() => {
@@ -45,6 +51,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
     return initial;
   });
 
+  // When a photo file is picked, open the crop & framing modal instead of uploading directly
   const handleMemberAvatarChange = (memberId: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -52,12 +59,29 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
       reader.onload = (event) => {
         const result = event.target?.result as string;
         if (result) {
-          setMemberAvatars(prev => ({ ...prev, [memberId]: result }));
-          localStorage.setItem(`feigao_avatar_${memberId}`, result);
+          setActiveCropMemberId(memberId);
+          setCropImageSrc(result);
+          setCropModalOpen(true);
         }
       };
       reader.readAsDataURL(file);
     }
+    // Clear input value so selecting the same file again works
+    e.target.value = '';
+  };
+
+  // Called when user finishes cropping in the modal
+  const handleCropComplete = (croppedBase64: string) => {
+    if (!activeCropMemberId) return;
+    setMemberAvatars(prev => ({ ...prev, [activeCropMemberId]: croppedBase64 }));
+    try {
+      localStorage.setItem(`feigao_avatar_${activeCropMemberId}`, croppedBase64);
+    } catch (e) {
+      console.error(e);
+    }
+    setCropModalOpen(false);
+    setCropImageSrc(null);
+    setActiveCropMemberId(null);
   };
 
   const handleResetMemberAvatar = (memberId: string) => {
@@ -80,12 +104,12 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
           <img
             src={currentAvatar}
             alt="Member Avatar"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-center"
             referrerPolicy="no-referrer"
           />
           <label className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white cursor-pointer text-[10px] font-semibold p-1 text-center leading-tight">
-            <Camera size={16} className="mb-0.5" />
-            <span>{lang === 'en' ? 'Upload' : '更换照片'}</span>
+            <Crop size={16} className="mb-0.5 text-amber-300" />
+            <span>{lang === 'en' ? 'Crop & Upload' : '框选更换照片'}</span>
             <input
               type="file"
               accept="image/*"
@@ -98,7 +122,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
         <div className="flex items-center gap-1">
           <label className="px-1.5 py-0.5 bg-[#f1f4f9] hover:bg-[#e2e8f3] text-[#1b365d] text-[10px] font-semibold rounded border border-[#cbe3e4] cursor-pointer transition-colors flex items-center gap-0.5">
             <Upload size={10} />
-            <span>{lang === 'en' ? 'Upload' : '上传/替换'}</span>
+            <span>{lang === 'en' ? 'Crop & Upload' : '框选上传'}</span>
             <input
               type="file"
               accept="image/*"
@@ -109,7 +133,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
           {isCustom && (
             <button
               onClick={() => handleResetMemberAvatar(memberId)}
-              className="p-0.5 text-gray-400 hover:text-red-600 transition-colors rounded"
+              className="p-0.5 text-gray-400 hover:text-red-600 transition-colors rounded cursor-pointer"
               title={lang === 'en' ? 'Reset Avatar' : '恢复默认'}
             >
               <RotateCcw size={11} />
@@ -120,26 +144,24 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
     );
   };
 
+  const getActiveMemberName = () => {
+    if (!activeCropMemberId) return undefined;
+    const member = TEAM_MEMBERS.find(m => m.id === activeCropMemberId);
+    if (!member) return undefined;
+    return lang === 'en' ? member.nameEn : member.nameZh;
+  };
+
   return (
     <div className="space-y-12 pb-12 animate-in fade-in duration-300">
       
       {/* Header Banner */}
-      <div className="border-b border-gray-200 pb-6 space-y-2 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div>
-          <span className="text-xs font-mono text-[#236869] uppercase font-bold tracking-wider">
-            {lang === 'en' ? 'LAB MEMBERS & ALUMNI' : '实验室成员与历届校友'}
-          </span>
-          <h1 className="font-heading text-3xl font-extrabold text-[#1b365d]">
-            {lang === 'en' ? 'Our Team' : '团队成员'}
-          </h1>
-        </div>
-
-        <button
-          onClick={onOpenJoinModal}
-          className="px-4 py-2 bg-[#1b365d] text-white text-xs font-semibold rounded-md hover:bg-[#2e476f] transition-colors self-start sm:self-auto"
-        >
-          {lang === 'en' ? '+ Join Our Team' : '+ 申请加入团队'}
-        </button>
+      <div className="border-b border-gray-200 pb-6 space-y-2">
+        <span className="text-xs font-mono text-[#236869] uppercase font-bold tracking-wider">
+          {lang === 'en' ? 'LAB MEMBERS & ALUMNI' : '实验室成员与历届校友'}
+        </span>
+        <h1 className="font-heading text-3xl font-extrabold text-[#1b365d]">
+          {lang === 'en' ? 'Our Team' : '团队成员'}
+        </h1>
       </div>
 
       {/* 1. Principal Investigator */}
@@ -295,6 +317,20 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang, onOpenJoinModal }) => 
           ))}
         </div>
       </section>
+
+      {/* Image Crop & Framing Modal */}
+      <ImageCropModal
+        isOpen={cropModalOpen}
+        imageSrc={cropImageSrc}
+        onClose={() => {
+          setCropModalOpen(false);
+          setCropImageSrc(null);
+          setActiveCropMemberId(null);
+        }}
+        onCropComplete={handleCropComplete}
+        lang={lang}
+        memberName={getActiveMemberName()}
+      />
 
     </div>
   );
