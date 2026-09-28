@@ -249,6 +249,17 @@ export const TEAM_MEMBERS: TeamMember[] = [
     interestsZh: ['双语者语义加工机制']
   },
   {
+    id: 'sasahira-ken',
+    nameEn: 'Ken Sasahira',
+    nameZh: '笹平贤',
+    roleEn: "Master's Student",
+    roleZh: '硕士研究生',
+    category: 'graduate',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80',
+    interestsEn: ['Bilingual cognitive control and neural representations'],
+    interestsZh: ['双语认知控制与神经表征机制']
+  },
+  {
     id: 'peng-yihong',
     nameEn: 'Yihong Peng',
     nameZh: '彭一洪',
@@ -285,6 +296,15 @@ export const TEAM_MEMBERS: TeamMember[] = [
     image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80'
   },
   {
+    id: 'miao-peida',
+    nameEn: 'Peida Miao',
+    nameZh: '缪沛达',
+    roleEn: 'Undergraduate Student',
+    roleZh: '本科生',
+    category: 'undergraduate',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80'
+  },
+  {
     id: 'huang-ke',
     nameEn: 'Ke Huang',
     nameZh: '黄可',
@@ -304,13 +324,58 @@ export const TEAM_MEMBERS: TeamMember[] = [
   }
 ];
 
-export const DATASET_INFO: DatasetItem = {
-  id: 'fed-dataset',
-  name: 'FED Dataset (FED数据集)',
-  subjectsCount: 120,
-  modality: 'fMRI (3T High-resolution functional scans)',
-  tasks: ['Semantic Judgment', 'Lexical Decision', 'Resting State', 'Behavioral Batteries'],
-  totalSize: '~2.4 TB',
-  bidsCompliant: true,
-  fmriPrepIncluded: true
-};
+export const DATASET_LIST: DatasetItem[] = [
+  {
+    id: 'fed-dataset',
+    name: 'Fudan Emoji Dataset',
+    nameEn: 'Fudan Emoji Dataset',
+    nameZh: 'Fudan Emoji Dataset',
+    shortName: 'FED',
+    badgeEn: 'SEMANTIC & AFFECTIVE NORMATIVE DATASET',
+    badgeZh: '语义与情感常模数据集',
+    summaryEn: 'Fudan Emoji Dataset (FED), a semantic and affective normative dataset containing 359 commonly used emojis in Chinese context and systematically distinguishing emotion-oriented and meaning-oriented emojis. FED provides subjective ratings on 12 dimensions, description-based vector embeddings and four data-driven uncertainty metrics.',
+    summaryZh: 'Fudan Emoji Dataset (FED), a semantic and affective normative dataset containing 359 commonly used emojis in Chinese context and systematically distinguishing emotion-oriented and meaning-oriented emojis. FED provides subjective ratings on 12 dimensions, description-based vector embeddings and four data-driven uncertainty metrics.',
+    subjectsCount: '359 Emojis',
+    itemsCount: '359 Emojis',
+    modality: 'Subjective Ratings & Vector Embeddings',
+    modalityEn: 'Subjective Ratings on 12 Dimensions & Vector Embeddings',
+    modalityZh: '12 维度主观评定常模与描述向量嵌入',
+    tasks: [
+      'Subjective ratings on 12 dimensions',
+      'Distinction between emotion-oriented and meaning-oriented emojis',
+      'Description-based vector embeddings',
+      'Four data-driven uncertainty metrics'
+    ],
+    tasksEn: [
+      'Subjective ratings on 12 dimensions',
+      'Distinction between emotion-oriented and meaning-oriented emojis',
+      'Description-based vector embeddings',
+      'Four data-driven uncertainty metrics'
+    ],
+    tasksZh: [
+      '12 个维度的主观评定常模',
+      '系统区分情绪导向与意义导向的 emoji',
+      '基于文字描述的向量嵌入 (Vector Embeddings)',
+      '4 项数据驱动的不确定性指标 (Uncertainty Metrics)'
+    ],
+    totalSize: 'Open Science Framework (OSF)',
+    bidsCompliant: false,
+    complianceEn: 'Open Science Framework (OSF) / https://osf.io/x643z/',
+    complianceZh: '开放科学框架 (OSF) / https://osf.io/x643z/',
+    fmriPrepIncluded: false,
+    highlightsEn: [
+      '359 commonly used emojis in Chinese context',
+      'Systematically distinguishing emotion-oriented and meaning-oriented emojis',
+      'Subjective ratings on 12 dimensions',
+      'Description-based vector embeddings and four data-driven uncertainty metrics'
+    ],
+    highlightsZh: [
+      '中文语境下 359 个常用 emoji 表情符号',
+      '系统区分情绪导向与意义导向的 emoji',
+      '提供 12 个维度的主观评定常模',
+      '包含基于文字描述的向量嵌入与四项数据驱动不确定性指标'
+    ]
+  }
+];
+
+export const DATASET_INFO: DatasetItem = DATASET_LIST[0];

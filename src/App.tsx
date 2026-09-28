@@ -5,7 +5,6 @@ import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { ResearchPage } from './pages/ResearchPage';
 import { TeamPage } from './pages/TeamPage';
-import { DatasetPage } from './pages/DatasetPage';
 import { ContactPage } from './pages/ContactPage';
 import { JoinLabModal } from './components/JoinLabModal';
 import { SearchModal } from './components/SearchModal';
@@ -41,7 +40,7 @@ export default function App() {
           />
         )}
 
-        {currentTab === 'research' && (
+        {(currentTab === 'research' || currentTab === 'dataset') && (
           <ResearchPage
             lang={lang}
           />
@@ -51,12 +50,6 @@ export default function App() {
           <TeamPage
             lang={lang}
             onOpenJoinModal={() => setIsJoinModalOpen(true)}
-          />
-        )}
-
-        {currentTab === 'dataset' && (
-          <DatasetPage
-            lang={lang}
           />
         )}
 

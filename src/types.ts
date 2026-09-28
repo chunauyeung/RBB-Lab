@@ -74,10 +74,30 @@ export interface ResearchMethod {
 export interface DatasetItem {
   id: string;
   name: string;
-  subjectsCount: number;
+  nameEn: string;
+  nameZh: string;
+  shortName: string;
+  badgeEn: string;
+  badgeZh: string;
+  summaryEn: string;
+  summaryZh: string;
+  descriptionEn?: string;
+  descriptionZh?: string;
+  subjectsCount?: number | string;
+  itemsCount?: string;
   modality: string;
+  modalityEn: string;
+  modalityZh: string;
   tasks: string[];
+  tasksEn?: string[];
+  tasksZh?: string[];
   totalSize: string;
-  bidsCompliant: boolean;
-  fmriPrepIncluded: boolean;
+  bidsCompliant?: boolean;
+  complianceEn?: string;
+  complianceZh?: string;
+  fmriPrepIncluded?: boolean;
+  osfUrl?: string;
+  docsUrl?: string;
+  highlightsEn?: string[];
+  highlightsZh?: string[];
 }

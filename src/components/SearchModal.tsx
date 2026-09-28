@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { X, Search, BookOpen, Users, Newspaper, ArrowRight } from 'lucide-react';
+import { X, Search, BookOpen, Users, Newspaper, ArrowRight, Database } from 'lucide-react';
 import { Language, ResearchPaper, TeamMember, NewsItem } from '../types';
-import { ALL_PUBLICATIONS, TEAM_MEMBERS, NEWS_ITEMS } from '../data/mockData';
+import { ALL_PUBLICATIONS, TEAM_MEMBERS, NEWS_ITEMS, DATASET_LIST } from '../data/mockData';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -9,17 +9,29 @@ interface SearchModalProps {
   lang: Language;
   onSelectPaper?: (paper: ResearchPaper) => void;
   onNavigateTab: (tab: string) => void;
+  onSelectDataset?: (id: string) => void;
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   onClose,
   lang,
-  onNavigateTab
+  onNavigateTab,
+  onSelectDataset
 }) => {
   const [query, setQuery] = useState('');
 
   if (!isOpen) return null;
+
+  const filteredDatasets = query.trim()
+    ? DATASET_LIST.filter(d =>
+        d.name.toLowerCase().includes(query.toLowerCase()) ||
+        d.nameEn.toLowerCase().includes(query.toLowerCase()) ||
+        d.nameZh.includes(query) ||
+        d.summaryEn.toLowerCase().includes(query.toLowerCase()) ||
+        d.summaryZh.includes(query)
+      )
+    : [];
 
   const filteredPapers = query.trim()
     ? ALL_PUBLICATIONS.filter(p => 
@@ -46,7 +58,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       )
     : [];
 
-  const hasResults = filteredPapers.length > 0 || filteredTeam.length > 0 || filteredNews.length > 0;
+  const hasResults = filteredDatasets.length > 0 || filteredPapers.length > 0 || filteredTeam.length > 0 || filteredNews.length > 0;
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 bg-black/50 backdrop-blur-xs p-4">
@@ -80,6 +92,41 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             </div>
           ) : (
             <>
+              {/* Datasets */}
+              {filteredDatasets.length > 0 && (
+                <div>
+                  <h4 className="font-mono text-[11px] font-semibold text-[#236869] uppercase tracking-wider mb-2 flex items-center gap-1">
+                    <Database size={14} /> Datasets ({filteredDatasets.length})
+                  </h4>
+                  <div className="space-y-1.5">
+                    {filteredDatasets.map(ds => (
+                      <div
+                        key={ds.id}
+                        onClick={() => {
+                          onNavigateTab('research');
+                          onClose();
+                          setTimeout(() => {
+                            const el = document.getElementById('datasets');
+                            if (el) el.scrollIntoView({ behavior: 'smooth' });
+                          }, 100);
+                        }}
+                        className="p-2.5 bg-[#f8fafd] hover:bg-[#eef3fb] rounded-lg cursor-pointer border border-[#e5e8ee] transition-colors flex items-center justify-between"
+                      >
+                        <div>
+                          <div className="font-semibold text-[#1b365d]">
+                            {lang === 'en' ? ds.nameEn : ds.nameZh}
+                          </div>
+                          <div className="text-[11px] text-gray-500">
+                            {lang === 'en' ? ds.summaryEn.slice(0, 85) + '...' : ds.summaryZh.slice(0, 60) + '...'}
+                          </div>
+                        </div>
+                        <ArrowRight size={14} className="text-[#236869] shrink-0 ml-2" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Papers */}
               {filteredPapers.length > 0 && (
                 <div>

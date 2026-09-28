@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Language } from '../types';
-import { Brain, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { Brain, Mail, MapPin, ExternalLink, Lock } from 'lucide-react';
 
 interface FooterProps {
   lang: Language;
@@ -9,6 +9,23 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeployGuide }) => {
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleSecretAdminTrigger = () => {
+    const next = clickCount + 1;
+    setClickCount(next);
+    if (next >= 3) {
+      setClickCount(0);
+      const current = localStorage.getItem('feigao_admin_mode') === 'true';
+      if (current) {
+        localStorage.removeItem('feigao_admin_mode');
+      } else {
+        localStorage.setItem('feigao_admin_mode', 'true');
+      }
+      window.dispatchEvent(new Event('storage'));
+      window.location.reload();
+    }
+  };
   return (
     <footer className="bg-[#181c20] text-gray-300 pt-12 pb-8 border-t border-gray-800 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,11 +68,6 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
                 </button>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('dataset')} className="hover:text-white transition-colors">
-                  {lang === 'en' ? 'FED Open Dataset' : 'FED 开放数据集'}
-                </button>
-              </li>
-              <li>
                 <button onClick={() => setCurrentTab('contact')} className="hover:text-white transition-colors">
                   {lang === 'en' ? 'Contact & Join Us' : '联系方式与合作交流'}
                 </button>
@@ -69,8 +81,15 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
               {lang === 'en' ? 'Open Science & Affiliations' : '开放科学与学术链接'}
             </h4>
             <ul className="space-y-2 text-xs text-gray-400">
-              <li className="flex items-center gap-1.5 hover:text-white cursor-pointer">
-                <ExternalLink size={12} /> OSF Repository (FED Dataset)
+              <li>
+                <a
+                  href="https://osf.io/x643z/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 hover:text-white transition-colors"
+                >
+                  <ExternalLink size={12} /> OSF Repository (Fudan Emoji Dataset)
+                </a>
               </li>
               <li className="flex items-center gap-1.5 hover:text-white cursor-pointer">
                 <ExternalLink size={12} /> Society for Neurobiology of Language
@@ -104,7 +123,11 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
-          <div>
+          <div
+            onClick={handleSecretAdminTrigger}
+            title={lang === 'en' ? 'Reading, Bilingualism, and Brain Lab' : '阅读、双语与大脑实验室'}
+            className="select-none cursor-default"
+          >
             © {new Date().getFullYear()} Reading, Bilingualism, and Brain Lab (阅读、双语与大脑实验室). All rights reserved.
           </div>
           <div className="flex gap-6">

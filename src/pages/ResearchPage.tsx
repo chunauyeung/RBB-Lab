@@ -180,6 +180,44 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ lang }) => {
         </div>
       </section>
 
+      {/* Section 4: Open Research Datasets */}
+      <section id="datasets" className="space-y-6 pt-4">
+        <div className="border-b border-gray-200 pb-4">
+          <h2 className="font-heading text-xl font-bold text-[#1b365d] border-l-4 border-[#236869] pl-3">
+            {lang === 'en' ? 'Open Research Datasets' : '开放数据集 (Open Research Datasets)'}
+          </h2>
+        </div>
+
+        {/* Fudan Emoji Dataset (FED) Card */}
+        <div
+          onClick={() => window.open('https://osf.io/x643z/', '_blank')}
+          className="bg-white rounded-r-xl rounded-l-xs p-5 sm:p-6 border-y border-r border-[#e5e8ee] border-l-4 border-l-[#236869] shadow-2xs hover:shadow-md transition-all cursor-pointer group flex flex-col sm:flex-row justify-between items-start sm:items-center gap-5"
+        >
+          <div className="space-y-2.5 max-w-4xl">
+            <h3 className="font-heading text-lg sm:text-xl font-bold text-[#1b365d] group-hover:text-[#236869] transition-colors leading-snug">
+              Fudan Emoji Dataset
+            </h3>
+
+            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-sans">
+              Fudan Emoji Dataset (FED), a semantic and affective normative dataset containing 359 commonly used emojis in Chinese context and systematically distinguishing emotion-oriented and meaning-oriented emojis. FED provides subjective ratings on 12 dimensions, description-based vector embeddings and four data-driven uncertainty metrics.
+            </p>
+          </div>
+
+          <div className="flex-shrink-0 self-start sm:self-center">
+            <a
+              href="https://osf.io/x643z/"
+              target="_blank"
+              rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="px-3.5 py-2 bg-[#1b365d] hover:bg-[#236869] text-white text-xs font-mono font-semibold rounded transition-colors flex items-center gap-1.5 shadow-2xs whitespace-nowrap shrink-0"
+            >
+              <ExternalLink size={13} className="shrink-0" />
+              <span className="whitespace-nowrap">{lang === 'en' ? 'ACCESS DATASET' : '获取数据集'}</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

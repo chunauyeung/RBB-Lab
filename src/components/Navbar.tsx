@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
-import { Search, Menu, X, Brain, Users, Database, Mail, Home } from 'lucide-react';
+import { Search, Menu, X, Brain, Users, Mail, Home } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;
@@ -24,7 +24,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'home', labelEn: 'Home', labelZh: '首页', icon: Home },
     { id: 'research', labelEn: 'Research', labelZh: '研究领域', icon: Brain },
     { id: 'team', labelEn: 'Team', labelZh: '团队成员', icon: Users },
-    { id: 'dataset', labelEn: 'Dataset', labelZh: 'FED数据集', icon: Database },
     { id: 'contact', labelEn: 'Contact', labelZh: '联系方式', icon: Mail },
   ];
 
@@ -64,11 +63,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentTab === item.id;
+
               return (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-3.5 py-2 rounded-md text-sm font-medium transition-all duration-150 flex items-center gap-1.5 ${
+                  className={`px-3.5 py-2 rounded-md text-sm font-medium transition-all duration-150 flex items-center gap-1.5 cursor-pointer ${
                     isActive
                       ? 'bg-[#1b365d] text-white shadow-2xs font-semibold'
                       : 'text-gray-700 hover:text-[#1b365d] hover:bg-[#f1f4f9]'
@@ -142,6 +142,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentTab === item.id;
+
             return (
               <button
                 key={item.id}
