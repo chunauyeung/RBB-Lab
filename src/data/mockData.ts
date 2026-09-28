@@ -198,7 +198,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'PRINCIPAL INVESTIGATOR / PH.D.',
     roleZh: '实验室负责人 / 博士生导师',
     category: 'pi',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80',
+    image: '/images/team/gao-fei.jpg',
     bioEn: 'Dr. Gao directs the Reading, Bilingualism, and Brain Lab. His research focuses on psycholinguistics/neurolinguistics, Chinese reading (lexical processing), SLA & bilingual cognition, and neuroimaging (EEG, fNIRS, fMRI).',
     bioZh: '高飞博士主持实验室工作。主要研究方向包括心理/神经语言学、汉语阅读（侧重词汇加工）、第二语言习得与双语认知，以及脑成像技术（EEG, fNIRS, fMRI）。',
     interestsEn: [
@@ -222,7 +222,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: "Master's Student",
     roleZh: '硕士研究生',
     category: 'graduate',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80',
+    image: '/images/team/ouyang-jun.jpg',
     interestsEn: ['Semantic processing mechanisms in bilinguals'],
     interestsZh: ['双语者语义加工机制']
   },
@@ -233,7 +233,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: "Master's Student",
     roleZh: '硕士研究生',
     category: 'graduate',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80',
+    image: '/images/team/yang-qian.jpg',
     interestsEn: ['Semantic processing mechanisms in bilinguals'],
     interestsZh: ['双语者语义加工机制']
   },
@@ -244,7 +244,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: "Master's Student",
     roleZh: '硕士研究生',
     category: 'graduate',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=500&q=80',
+    image: '/images/team/chen-xingchi.jpg',
     interestsEn: ['Semantic processing mechanisms in bilinguals'],
     interestsZh: ['双语者语义加工机制']
   },
@@ -266,7 +266,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'Undergraduate Student',
     roleZh: '本科生',
     category: 'undergraduate',
-    image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=500&q=80'
+    image: '/images/team/peng-yihong.jpg'
   },
   {
     id: 'yan-chenglin',
@@ -275,7 +275,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'Undergraduate Student',
     roleZh: '本科生',
     category: 'undergraduate',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80'
+    image: '/images/team/yan-chenglin.jpg'
   },
   {
     id: 'han-muru',
@@ -284,7 +284,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'Undergraduate Student',
     roleZh: '本科生',
     category: 'undergraduate',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80'
+    image: '/images/team/han-muru.jpg'
   },
   {
     id: 'gui-runshan',
@@ -293,7 +293,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'Undergraduate Student',
     roleZh: '本科生',
     category: 'undergraduate',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80'
+    image: '/images/team/gui-runshan.jpg'
   },
   {
     id: 'miao-peida',
@@ -311,7 +311,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'Alumni',
     roleZh: '历届成员',
     category: 'alumni',
-    image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=500&q=80'
+    image: '/images/team/huang-ke.jpg'
   },
   {
     id: 'lin-zikai',
@@ -320,7 +320,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'Alumni',
     roleZh: '历届成员',
     category: 'alumni',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80'
+    image: '/images/team/lin-zikai.jpg'
   }
 ];
 
