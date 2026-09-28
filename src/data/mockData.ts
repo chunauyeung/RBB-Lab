@@ -158,13 +158,13 @@ export const NEWS_ITEMS: NewsItem[] = [
   {
     id: 'news-1',
     date: 'OCT 12, 2024',
-    titleEn: 'Dr. Gao presents keynote at SNL 2024',
-    titleZh: '高飞教授在 2024 神经语言学学会 (SNL) 年会作主旨报告',
+    titleEn: 'Associate Researcher Fei Gao presents keynote at SNL 2024',
+    titleZh: '高飞副研究员在 2024 神经语言学学会 (SNL) 年会作主旨报告',
     summaryEn: 'Discussing new findings on the bilingual advantage in executive control networks.',
     summaryZh: '围绕“双语经历对执行控制网络的塑造机制”分享最新研究成果。',
     category: 'Keynote',
-    contentEn: 'At the Society for the Neurobiology of Language (SNL) Annual Meeting held in Helsinki, Dr. Gao Fei delivered a plenary talk titled "Dynamic Plasticity of the Reading Network in Multi-script Bilinguals". The lecture highlighted recent high-resolution fMRI findings from the FED cohort.',
-    contentZh: '在赫尔辛基举行的神经语言学学会（SNL）年会上，高飞教授发表了题为“多书写系统双语者阅读网络的动态可塑性”的主题演讲，重点展示了来自 FED 队列的高分辨率 fMRI 最新研究成果。'
+    contentEn: 'At the Society for the Neurobiology of Language (SNL) Annual Meeting held in Helsinki, Associate Researcher Fei Gao delivered a plenary talk titled "Dynamic Plasticity of the Reading Network in Multi-script Bilinguals". The lecture highlighted recent high-resolution fMRI findings from the FED cohort.',
+    contentZh: '在赫尔辛基举行的神经语言学学会（SNL）年会上，高飞副研究员发表了题为“多书写系统双语者阅读网络的动态可塑性”的主题演讲，重点展示了来自 FED 队列的高分辨率 fMRI 最新研究成果。'
   },
   {
     id: 'news-2',
@@ -195,12 +195,12 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'gao-fei',
     nameEn: 'Fei Gao (高飞)',
     nameZh: '高飞 (Fei Gao)',
-    roleEn: 'PRINCIPAL INVESTIGATOR / PH.D.',
-    roleZh: '实验室负责人 / 博士生导师',
+    roleEn: "ASSOCIATE RESEARCHER / MASTER'S ADVISOR",
+    roleZh: '副研究员 / 硕士生导师',
     category: 'pi',
     image: '/images/team/gao-fei.jpg',
-    bioEn: 'Dr. Gao directs the Reading, Bilingualism, and Brain Lab. His research focuses on psycholinguistics/neurolinguistics, Chinese reading (lexical processing), SLA & bilingual cognition, and neuroimaging (EEG, fNIRS, fMRI).',
-    bioZh: '高飞博士主持实验室工作。主要研究方向包括心理/神经语言学、汉语阅读（侧重词汇加工）、第二语言习得与双语认知，以及脑成像技术（EEG, fNIRS, fMRI）。',
+    bioEn: 'Associate Researcher Fei Gao directs the Reading, Bilingualism, and Brain Lab. His research focuses on psycholinguistics/neurolinguistics, Chinese reading (lexical processing), SLA & bilingual cognition, and neuroimaging (EEG, fNIRS, fMRI).',
+    bioZh: '高飞副研究员主持实验室工作。主要研究方向包括心理/神经语言学、汉语阅读（侧重词汇加工）、第二语言习得与双语认知，以及脑成像技术（EEG, fNIRS, fMRI）。',
     interestsEn: [
       'Psycho / Neurolinguistics',
       'Chinese Reading (Focus on Lexical Processing)',

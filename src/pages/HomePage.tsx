@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Language, ResearchPaper } from '../types';
-import { FEATURED_RESEARCH, NEWS_ITEMS } from '../data/mockData';
+import { FEATURED_RESEARCH } from '../data/mockData';
 import { BrainDiagram } from '../components/BrainDiagram';
 
 interface HomePageProps {
@@ -121,58 +121,6 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             );
           })}
-        </div>
-      </section>
-
-      {/* Latest News Section */}
-      <section className="space-y-6 pt-4">
-        <div className="flex justify-between items-end border-b border-gray-200 pb-4">
-          <div>
-            <div className="text-xs font-mono font-semibold uppercase text-[#236869] tracking-wider mb-1">
-              {lang === 'en' ? 'ANNOUNCEMENTS & EVENTS' : '最新科研动态'}
-            </div>
-            <h3 className="font-heading text-2xl font-bold text-[#1b365d]">
-              {lang === 'en' ? 'Latest News' : '新闻与学术前沿'}
-            </h3>
-          </div>
-
-          <span className="text-xs font-mono text-gray-400 uppercase">
-            {lang === 'en' ? 'NEWS ARCHIVE' : '动态归档'}
-          </span>
-        </div>
-
-        <div className="bg-white rounded-xl border border-[#e5e8ee] divide-y divide-gray-100 shadow-2xs overflow-hidden">
-          {NEWS_ITEMS.map((item) => (
-            <div
-              key={item.id}
-              className="p-5 hover:bg-[#f8fafd] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-            >
-              <div className="space-y-1 max-w-3xl">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono font-bold text-[#236869] uppercase">
-                    {item.date}
-                  </span>
-                  <span className="px-2 py-0.5 text-[10px] font-mono bg-blue-50 text-[#1b365d] rounded uppercase font-medium">
-                    {item.category}
-                  </span>
-                </div>
-                <h4 className="font-heading text-sm font-bold text-[#1b365d]">
-                  {lang === 'en' ? item.titleEn : item.titleZh}
-                </h4>
-                <p className="text-xs text-gray-600">
-                  {lang === 'en' ? item.summaryEn : item.summaryZh}
-                </p>
-              </div>
-
-              <button
-                onClick={() => alert(`${lang === 'en' ? item.titleEn : item.titleZh}\n\n${lang === 'en' ? item.contentEn : item.contentZh}`)}
-                className="self-start sm:self-center px-3 py-1.5 text-xs font-mono font-semibold text-[#1b365d] hover:bg-blue-50 rounded transition-colors flex items-center gap-1"
-              >
-                <span>{lang === 'en' ? 'READ MORE' : '查看详情'}</span>
-                <ArrowRight size={13} />
-              </button>
-            </div>
-          ))}
         </div>
       </section>
 

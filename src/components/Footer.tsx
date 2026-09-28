@@ -53,23 +53,47 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <button onClick={() => setCurrentTab('home')} className="hover:text-white transition-colors">
+                <button
+                  onClick={() => {
+                    setCurrentTab('home');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   {lang === 'en' ? 'Home' : '首页'}
                 </button>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('research')} className="hover:text-white transition-colors">
-                  {lang === 'en' ? 'Research & Publications' : '研究领域与精选论文'}
+                <button
+                  onClick={() => {
+                    setCurrentTab('research');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  {lang === 'en' ? 'Research' : '研究领域'}
                 </button>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('team')} className="hover:text-white transition-colors">
-                  {lang === 'en' ? 'Team Profiles' : '团队成员'}
+                <button
+                  onClick={() => {
+                    setCurrentTab('team');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  {lang === 'en' ? 'Team' : '团队成员'}
                 </button>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('contact')} className="hover:text-white transition-colors">
-                  {lang === 'en' ? 'Contact & Join Us' : '联系方式与合作交流'}
+                <button
+                  onClick={() => {
+                    setCurrentTab('contact');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  {lang === 'en' ? 'Contact' : '联系方式'}
                 </button>
               </li>
             </ul>
@@ -78,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
           {/* Col 3: Research Networks */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono uppercase tracking-wider font-semibold text-gray-200">
-              {lang === 'en' ? 'Open Science & Affiliations' : '开放科学与学术链接'}
+              {lang === 'en' ? 'Open Science' : '开放科学'}
             </h4>
             <ul className="space-y-2 text-xs text-gray-400">
               <li>
@@ -90,12 +114,6 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
                 >
                   <ExternalLink size={12} /> OSF Repository (Fudan Emoji Dataset)
                 </a>
-              </li>
-              <li className="flex items-center gap-1.5 hover:text-white cursor-pointer">
-                <ExternalLink size={12} /> Society for Neurobiology of Language
-              </li>
-              <li className="flex items-center gap-1.5 hover:text-white cursor-pointer">
-                <ExternalLink size={12} /> Cognitive Neuroscience Center
               </li>
             </ul>
           </div>

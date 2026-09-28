@@ -63,8 +63,8 @@ export const JoinLabModal: React.FC<JoinLabModalProps> = ({ isOpen, onClose, lan
               </h4>
               <p className="text-sm text-gray-600 max-w-sm mx-auto leading-relaxed">
                 {lang === 'en'
-                  ? 'Thank you for your interest in joining our lab. Dr. Gao and the recruitment team will review your statement and contact you via email.'
-                  : '感谢您关注本实验室。高飞教授及遴选团队将认真审阅您的申请材料并与您取得联系。'}
+                  ? 'Thank you for your interest in joining our lab. Associate Researcher Fei Gao and the recruitment team will review your statement and contact you via email.'
+                  : '感谢您关注本实验室。高飞副研究员及遴选团队将认真审阅您的申请材料并与您取得联系。'}
               </p>
               <button
                 onClick={resetAndClose}

@@ -232,7 +232,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang }) => {
       {/* 1. Principal Investigator */}
       {pi && (
         <section className="bg-white rounded-xl border border-[#e5e8ee] shadow-2xs p-6 lg:p-8 space-y-6">
-          <div className="text-xs font-mono font-bold text-[#236869] uppercase tracking-wider">
+          <div className="text-[23px] font-mono font-bold text-[#236869] uppercase tracking-wider">
             {lang === 'en' ? 'PRINCIPAL INVESTIGATOR' : '实验室负责人 (PI)'}
           </div>
 
