@@ -150,7 +150,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang }) => {
 
   // Pure clean avatar presentation for regular visitors (Zero upload UI, zero hover masks)
   const renderMemberAvatar = (memberId: string, defaultImage?: string, sizeClasses = "w-16 h-16 rounded-xl") => {
-    const currentAvatar = memberAvatars[memberId] || defaultImage || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80';
+    const currentAvatar = memberAvatars[memberId] || defaultImage || '/images/team/ouyang-jun.jpg';
 
     return (
       <div className={`${sizeClasses} overflow-hidden border border-gray-200 shadow-2xs shrink-0 bg-slate-100`}>

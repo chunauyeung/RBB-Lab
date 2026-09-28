@@ -126,7 +126,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ lang }) => {
       <section className="space-y-6 pt-4">
         <div className="border-b border-gray-200 pb-4">
           <h2 className="font-heading text-xl font-bold text-[#1b365d] border-l-4 border-[#1b365d] pl-3">
-            {lang === 'en' ? 'Selected Publications' : '代表性论著 (Selected Publications)'}
+            {lang === 'en' ? 'Selected Publications' : '代表性论著'}
           </h2>
         </div>
 
@@ -184,7 +184,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ lang }) => {
       <section id="datasets" className="space-y-6 pt-4">
         <div className="border-b border-gray-200 pb-4">
           <h2 className="font-heading text-xl font-bold text-[#1b365d] border-l-4 border-[#236869] pl-3">
-            {lang === 'en' ? 'Open Research Datasets' : '开放数据集 (Open Research Datasets)'}
+            {lang === 'en' ? 'Open Research Datasets' : '开放数据集'}
           </h2>
         </div>
 
