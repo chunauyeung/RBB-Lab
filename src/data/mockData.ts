@@ -293,7 +293,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     roleEn: 'Undergraduate Student',
     roleZh: '本科生',
     category: 'undergraduate',
-    image: '/images/team/yan-chenglin.jpg'
+    image: '/images/team/yan-chenglin.jpg?v=2'
   },
   {
     id: 'han-muru',
