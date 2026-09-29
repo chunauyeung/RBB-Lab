@@ -424,30 +424,29 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang }) => {
           {lang === 'en' ? 'Alumni' : '历届成员'}
         </h2>
 
-        <div className="space-y-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {alumni.map((member) => (
             <div
               key={member.id}
-              className="bg-white rounded-xl p-5 sm:p-6 border border-[#e5e8ee] shadow-2xs hover:border-[#236869] transition-all flex items-center justify-between gap-4"
+              className="bg-white rounded-xl p-5 sm:p-6 border border-[#e5e8ee] shadow-2xs hover:border-[#1b365d] transition-all flex items-center gap-5"
             >
-              <div className="space-y-1 min-w-0 flex-1">
-                <div className="flex items-center gap-3 flex-wrap">
-                  <h3 className="font-heading text-lg font-bold text-[#1b365d]">
-                    {lang === 'en' ? member.nameEn : member.nameZh}
-                  </h3>
-                  <span className="px-2.5 py-0.5 bg-[#f4f7f6] text-gray-600 text-xs font-mono font-semibold rounded-md border border-[#dce3de]">
-                    {lang === 'en' ? member.roleEn : member.roleZh}
+              {renderMemberAvatar(member.id, member.image, "w-24 h-24 sm:w-28 sm:h-28 rounded-2xl")}
+              <div className="space-y-2 min-w-0 flex-1">
+                <h3 className="font-heading text-lg sm:text-xl font-bold text-[#1b365d] truncate">
+                  {lang === 'en' ? member.nameEn : member.nameZh}
+                </h3>
+                <div>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#f4f7f6] text-[#236869] text-xs sm:text-sm font-mono font-semibold rounded-md border border-[#dce3de]">
+                    <GraduationCap size={15} className="shrink-0" />
+                    <span>{lang === 'en' ? member.roleEn : member.roleZh}</span>
                   </span>
                 </div>
                 {(member.currentRoleEn || member.currentRoleZh) && (
-                  <div className="text-xs font-semibold text-[#236869] pt-1">
+                  <div className="text-xs sm:text-sm font-medium text-gray-600 truncate pt-0.5">
                     {lang === 'en' ? member.currentRoleEn : member.currentRoleZh}
                   </div>
                 )}
               </div>
-              <span className="px-3 py-1 bg-[#f4f7f6] text-[#1b365d] text-xs font-mono rounded-md border border-[#dce3de] shrink-0 font-medium">
-                {lang === 'en' ? 'Alumni' : '历届成员'}
-              </span>
             </div>
           ))}
         </div>
