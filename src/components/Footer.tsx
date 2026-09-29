@@ -112,7 +112,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
                   rel="noreferrer"
                   className="flex items-center gap-1.5 hover:text-white transition-colors"
                 >
-                  <ExternalLink size={12} /> OSF Repository (Fudan Emoji Dataset)
+                  <ExternalLink size={12} /> {lang === 'en' ? 'OSF Repository (Fudan Emoji Dataset)' : 'OSF 开源仓库 (复旦emoji数据集)'}
                 </a>
               </li>
             </ul>

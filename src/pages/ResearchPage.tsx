@@ -37,7 +37,7 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ lang }) => {
           {lang === 'en' ? 'Core Scientific Domains' : '核心学科方向与主要成果'}
         </span>
         <h1 className="font-heading text-3xl font-extrabold text-[#1b365d]">
-          {lang === 'en' ? 'Research Areas & Selected Publications' : '研究领域与代表性论著'}
+          {lang === 'en' ? 'Research Areas & Latest Publications' : '研究领域与最新研究'}
         </h1>
         <p className="text-sm text-gray-600 max-w-2xl">
           {lang === 'en'
@@ -122,11 +122,11 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ lang }) => {
         </div>
       </section>
 
-      {/* Section 3: Selected Publications */}
+      {/* Section 3: Latest Publications */}
       <section className="space-y-6 pt-4">
         <div className="border-b border-gray-200 pb-4">
           <h2 className="font-heading text-xl font-bold text-[#1b365d] border-l-4 border-[#1b365d] pl-3">
-            {lang === 'en' ? 'Selected Publications' : '代表性论著'}
+            {lang === 'en' ? 'Latest Publications' : '最新研究'}
           </h2>
         </div>
 
@@ -195,11 +195,13 @@ export const ResearchPage: React.FC<ResearchPageProps> = ({ lang }) => {
         >
           <div className="space-y-2.5 max-w-4xl">
             <h3 className="font-heading text-lg sm:text-xl font-bold text-[#1b365d] group-hover:text-[#236869] transition-colors leading-snug">
-              Fudan Emoji Dataset
+              {lang === 'en' ? 'Fudan Emoji Dataset (FED)' : '复旦emoji数据集'}
             </h3>
 
             <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-sans">
-              Fudan Emoji Dataset (FED), a semantic and affective normative dataset containing 359 commonly used emojis in Chinese context and systematically distinguishing emotion-oriented and meaning-oriented emojis. FED provides subjective ratings on 12 dimensions, description-based vector embeddings and four data-driven uncertainty metrics.
+              {lang === 'en'
+                ? 'Fudan Emoji Dataset (FED), a semantic and affective normative dataset containing 359 commonly used emojis in Chinese context and systematically distinguishing emotion-oriented and meaning-oriented emojis. FED provides subjective ratings on 12 dimensions, description-based vector embeddings and four data-driven uncertainty metrics.'
+                : '复旦emoji数据集（Fudan Emoji Dataset, FED）是面向中文语境的语义与情感常模数据集，共收录 359 个中文常用 emoji 表情符号，并系统区分情绪导向与意义导向的 emoji。FED 提供了 12 个维度的主观评定常模、基于文字描述的向量嵌入（Vector Embeddings）以及四项数据驱动的不确定性指标。'}
             </p>
           </div>
 

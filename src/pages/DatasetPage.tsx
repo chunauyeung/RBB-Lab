@@ -207,7 +207,7 @@ export const DatasetPage: React.FC<DatasetPageProps> = ({
             }`}
           >
             <Smile size={16} />
-            <span>{lang === 'en' ? 'Fudan Emoji Dataset (FED)' : '复旦emoji数据集 (FED)'}</span>
+            <span>{lang === 'en' ? 'Fudan Emoji Dataset (FED)' : '复旦表情符号数据集 (FED)'}</span>
           </button>
 
           <button

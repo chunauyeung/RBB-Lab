@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Language, ResearchPaper } from '../types';
 import { FEATURED_RESEARCH } from '../data/mockData';
-import { BrainDiagram } from '../components/BrainDiagram';
 
 interface HomePageProps {
   lang: Language;
@@ -21,41 +20,32 @@ export const HomePage: React.FC<HomePageProps> = ({
       
       {/* Hero Section */}
       <section className="pt-6 sm:pt-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          {/* Left Text Column */}
-          <div className="lg:col-span-7 space-y-6">
+        <div className="max-w-4xl space-y-6">
 
-            <div className="space-y-2">
-              <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1b365d] tracking-tight leading-[1.15]">
-                Reading, Bilingualism, and Brain Lab
-              </h1>
-              <h2 className="font-heading text-xl sm:text-2xl font-bold text-[#236869]">
-                阅读、双语与大脑实验室
-              </h2>
-            </div>
-
-            <p className="text-sm sm:text-base text-gray-700 leading-relaxed max-w-2xl font-sans">
-              {lang === 'en'
-                ? 'We explore the neural mechanisms of language processing, focusing on how bilingualism shapes cognitive function and brain plasticity across the lifespan. Using advanced fMRI, EEG, and computational models, our laboratory bridges cognitive science and education.'
-                : '我们致力于揭示语言加工背后的神经机制，重点探索双语经验如何重塑全生命周期的大脑结构与功能可塑性。融合高场 fMRI、EEG 脑电技术与计算模型，实验室构建认知神经科学与教育落地的桥梁。'}
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 pt-2">
-              <button
-                onClick={() => onNavigate('research')}
-                className="px-6 py-3 bg-[#1b365d] text-white text-sm font-semibold rounded-lg hover:bg-[#2e476f] transition-all flex items-center gap-2 shadow-sm hover:shadow"
-              >
-                <span>{lang === 'en' ? 'EXPLORE RESEARCH' : '探索研究领域'}</span>
-                <ArrowRight size={16} />
-              </button>
-            </div>
+          <div className="space-y-2">
+            <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1b365d] tracking-tight leading-[1.15]">
+              Reading, Bilingualism, and Brain Lab
+            </h1>
+            <h2 className="font-heading text-xl sm:text-2xl font-bold text-[#236869]">
+              阅读、双语与大脑实验室
+            </h2>
           </div>
 
-          {/* Right Interactive Brain Diagram */}
-          <div className="lg:col-span-5">
-            <BrainDiagram lang={lang} />
+          <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-sans">
+            {lang === 'en'
+              ? 'We explore the neural mechanisms of language processing, focusing on how bilingualism shapes cognitive function and brain plasticity across the lifespan. Using advanced fMRI, EEG, and computational models, our laboratory bridges cognitive science and education.'
+              : '我们致力于揭示语言加工背后的神经机制，重点探索双语经验如何重塑全生命周期的大脑结构与功能可塑性。融合高场 fMRI、EEG 脑电技术与计算模型，实验室构建认知神经科学与教育落地的桥梁。'}
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4 pt-2">
+            <button
+              onClick={() => onNavigate('research')}
+              className="px-6 py-3 bg-[#1b365d] text-white text-sm font-semibold rounded-lg hover:bg-[#2e476f] transition-all flex items-center gap-2 shadow-sm hover:shadow cursor-pointer"
+            >
+              <span>{lang === 'en' ? 'EXPLORE RESEARCH' : '探索研究领域'}</span>
+              <ArrowRight size={16} />
+            </button>
           </div>
 
         </div>
@@ -65,11 +55,8 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section className="space-y-6 pt-6">
         <div className="flex justify-between items-end border-b border-gray-200 pb-4">
           <div>
-            <div className="text-xs font-mono font-semibold uppercase text-[#236869] tracking-wider mb-1">
-              {lang === 'en' ? 'SELECTED HIGHLIGHTS' : '代表性研究亮点'}
-            </div>
             <h3 className="font-heading text-2xl font-bold text-[#1b365d]">
-              {lang === 'en' ? 'Featured Research' : '实验室核心亮点研究'}
+              {lang === 'en' ? 'Selected Publications' : '实验室代表性研究'}
             </h3>
           </div>
 

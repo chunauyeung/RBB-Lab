@@ -38,8 +38,37 @@ export const TeamPhotoStudioModal: React.FC<TeamPhotoStudioModalProps> = ({
   const [activeTab, setActiveTab] = useState<'manage' | 'deploy'>('manage');
   const [copiedCode, setCopiedCode] = useState(false);
   const [downloadSuccessId, setDownloadSuccessId] = useState<string | null>(null);
+  const [isSavingToProject, setIsSavingToProject] = useState(false);
+  const [saveSuccessMsg, setSaveSuccessMsg] = useState<string | null>(null);
 
   if (!isOpen) return null;
+
+  const handleSaveToProject = async () => {
+    setIsSavingToProject(true);
+    setSaveSuccessMsg(null);
+    try {
+      const res = await fetch('/api/save-team-photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(memberAvatars)
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSaveSuccessMsg(
+          lang === 'en'
+            ? `Successfully saved ${data.saved.length} photos directly to public/images/team/*.jpg! They are now permanent static files ready for GitHub push.`
+            : `🎉 成功将 ${data.saved.length} 张照片永久固化到 public/images/team/*.jpg！现在直接 push 到 GitHub 部署，所有访客都会看到这一模一样的照片！`
+        );
+      } else {
+        alert(data.error || 'Failed to save');
+      }
+    } catch (e) {
+      console.error(e);
+      alert('保存失败，请重试');
+    } finally {
+      setIsSavingToProject(false);
+    }
+  };
 
   // Helper to trigger download of a single image
   const handleDownloadSingle = (member: TeamMember) => {
@@ -156,21 +185,41 @@ export const TEAM_MEMBERS: TeamMember[] = ${JSON.stringify(customizedMembers, nu
             <div className="space-y-6">
               
               {/* Information Notice */}
-              <div className="bg-[#f0f9ff] border border-[#bae6fd] rounded-xl p-3.5 flex items-start gap-3 text-xs text-[#0369a1]">
-                <Info size={18} className="shrink-0 text-[#0284c7] mt-0.5" />
-                <div className="space-y-1">
-                  <p className="font-semibold">
-                    {lang === 'en'
-                      ? 'Interactive Crop & Face Centering Studio'
-                      : '照片居中与框选操作说明'}
-                  </p>
-                  <p className="text-[#0c4a6e] leading-relaxed">
-                    {lang === 'en'
-                      ? 'Click "Select & Crop" on any member to upload their original photo. You can drag to position their face, zoom in/out, and rotate 90°. Once saved, you can preview the effect immediately on this website.'
-                      : '点击任意成员的「选择照片并框选」，上传原图后即可自由按住拖动人脸居中、调整缩放倍率及旋转。裁剪完成后立即在本站实时生效并自动记忆。'}
-                  </p>
+              <div className="bg-[#f0f9ff] border border-[#bae6fd] rounded-xl p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-[#0369a1]">
+                <div className="flex items-start gap-3">
+                  <Info size={18} className="shrink-0 text-[#0284c7] mt-0.5" />
+                  <div className="space-y-1">
+                    <p className="font-semibold">
+                      {lang === 'en'
+                        ? 'Interactive Crop & Permanent Deployment'
+                        : '照片居中框选与永久写入项目'}
+                    </p>
+                    <p className="text-[#0c4a6e] leading-relaxed">
+                      {lang === 'en'
+                        ? 'Click "Select & Crop" to adjust centering and zoom. When satisfied, click the button on the right to permanently write all photos to public/images/team/ so they persist when pushed to GitHub!'
+                        : '点击任意成员的「选择并框选」，拖动居中后保存。调整满意后，点击右侧按钮即可一键永久写入项目的 public/ 目录，push 到 GitHub 部署后所有人均可见！'}
+                    </p>
+                  </div>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={handleSaveToProject}
+                  disabled={isSavingToProject || Object.keys(memberAvatars).length === 0}
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-sm transition-all whitespace-nowrap shrink-0 self-stretch sm:self-auto justify-center"
+                >
+                  <Sparkles size={14} className="text-emerald-200" />
+                  <span>{isSavingToProject ? '正在永久写入...' : '一键永久固化到源码 (Push 准备)'}</span>
+                </button>
               </div>
+
+              {/* Success Notification */}
+              {saveSuccessMsg && (
+                <div className="bg-emerald-50 border border-emerald-300 rounded-xl p-3.5 flex items-center gap-2.5 text-xs text-emerald-800 animate-in fade-in">
+                  <Check size={18} className="text-emerald-600 shrink-0" />
+                  <span className="font-medium">{saveSuccessMsg}</span>
+                </div>
+              )}
 
               {/* Members List */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -178,7 +227,7 @@ export const TEAM_MEMBERS: TeamMember[] = ${JSON.stringify(customizedMembers, nu
                   const currentAvatar =
                     memberAvatars[member.id] ||
                     member.image ||
-                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80';
+                    '/images/team/ouyang-jun.jpg';
                   const isCustom = Boolean(memberAvatars[member.id]);
 
                   return (
@@ -275,22 +324,32 @@ export const TEAM_MEMBERS: TeamMember[] = ${JSON.stringify(customizedMembers, nu
                 </p>
               </div>
 
-              {/* Approach 1: Ask AI to commit permanently */}
-              <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-2xs space-y-3">
-                <div className="flex items-center gap-2 text-[#1b365d] font-bold text-base">
-                  <Sparkles size={18} className="text-amber-500" />
-                  <span>方式一：直接由 AI 帮您永久固化到源码中（最轻松）</span>
+              {/* Approach 1: Instant Permanent Save */}
+              <div className="border border-emerald-200 bg-emerald-50/40 rounded-xl p-5 shadow-2xs space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-emerald-900 font-bold text-base">
+                    <Sparkles size={18} className="text-emerald-600" />
+                    <span>方式一：一键永久固化为项目静态文件（最推荐，直接用于 Git Push）</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleSaveToProject}
+                    disabled={isSavingToProject || Object.keys(memberAvatars).length === 0}
+                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-sm transition-all whitespace-nowrap justify-center"
+                  >
+                    <Sparkles size={14} className="text-emerald-200" />
+                    <span>{isSavingToProject ? '正在写入...' : '立即永久保存到 public/ 目录'}</span>
+                  </button>
                 </div>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  您在左侧第 1 步里使用「选择并框选」把高飞老师和各位同学的照片调整满意后，
-                  直接在右侧或者下方的聊天对话框里对 AI 发送一句话：
+                  点击上方按钮后，系统会将您在 Preview 中裁切并确认的所有照片自动转换并写入项目的 <code className="bg-white border px-1.5 py-0.5 rounded font-mono text-[#1b365d]">public/images/team/*.jpg</code> 物理文件中。写入完成后，该图片就已是项目的永久代码资产，直接 <code className="bg-white border px-1.5 py-0.5 rounded font-mono text-[#1b365d]">git add . && git push</code> 部署后，全世界任何人访问都会看到这些照片！
                 </p>
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 font-mono text-xs text-[#1b365d] select-all font-semibold">
-                  “请把当前管理后台里框选好的团队照片永久写入 mockData.ts 源码中”
-                </div>
-                <p className="text-xs text-gray-500">
-                  AI 会自动提取您裁剪好的所有居中高分辨率图像，直接替换掉源文件里的初始示例图片。这样无论是谁从任何设备打开网站，展示的都是这批专属照片！
-                </p>
+                {saveSuccessMsg && (
+                  <div className="bg-white border border-emerald-400 rounded-lg p-2.5 flex items-center gap-2 text-xs text-emerald-800 font-medium">
+                    <Check size={16} className="text-emerald-600 shrink-0" />
+                    <span>{saveSuccessMsg}</span>
+                  </div>
+                )}
               </div>
 
               {/* Approach 2: Export Code */}
