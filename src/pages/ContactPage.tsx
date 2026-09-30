@@ -97,7 +97,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang, onOpenJoinModal 
 
         {/* Right Column: Campus Map */}
         <div className="lg:col-span-7 space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="hidden">
             <div className="text-xs font-mono font-bold text-[#1b365d] uppercase tracking-wider">
               {lang === 'en' ? 'Campus Location' : '实验室地理位置'}
             </div>

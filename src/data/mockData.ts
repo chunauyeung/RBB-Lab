@@ -276,13 +276,13 @@ export const TEAM_MEMBERS: TeamMember[] = [
     interestsZh: ['双语者语义加工机制']
   },
   {
-    id: 'sasahira-ken',
-    nameEn: 'Ken Sasahira',
+    id: 'sasadaira-ken',
+    nameEn: 'Ken Sasadaira',
     nameZh: '笹平贤',
     roleEn: 'Master Student',
     roleZh: '硕士研究生',
     category: 'graduate',
-    image: '/images/team/sasahira-ken.jpg',
+    image: '/images/team/sasadaira-ken.jpg',
     interestsEn: ['Bilingual cognitive control and neural representations'],
     interestsZh: ['双语认知控制与神经表征机制']
   },
@@ -326,8 +326,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'huang-ke',
     nameEn: 'Ke Huang',
     nameZh: '黄可',
-    roleEn: 'Alumni',
-    roleZh: '历届成员',
+    roleEn: 'Undergraduate Graduates of 2026',
+    roleZh: '2026届本科生',
     category: 'alumni',
     image: '/images/team/huang-ke.jpg'
   },
@@ -335,8 +335,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'lin-zikai',
     nameEn: 'Zikai Lin',
     nameZh: '林子开',
-    roleEn: 'Alumni',
-    roleZh: '历届成员',
+    roleEn: 'Undergraduate Graduates of 2025',
+    roleZh: '2025届本科生',
     category: 'alumni',
     image: '/images/team/lin-zikai.jpg'
   }

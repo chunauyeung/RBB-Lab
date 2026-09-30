@@ -22,7 +22,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ lang }) => {
 
   const renderRole = (roleEn: string, roleZh: string) => (
     <span className="px-3 py-1 bg-[#f4f7f6] text-[#236869] text-xs sm:text-sm font-mono font-semibold rounded-md border border-[#dce3de] flex items-center gap-1.5">
-      <GraduationCap size={15} />{lang === 'en' ? roleEn : roleZh}
+      <GraduationCap size={15} className="shrink-0" />{lang === 'en' ? roleEn : roleZh}
     </span>
   );
 
