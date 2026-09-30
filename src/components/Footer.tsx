@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Language } from '../types';
-import { Brain, Mail, MapPin, ExternalLink, Lock } from 'lucide-react';
+import { Brain, Mail, MapPin, ExternalLink } from 'lucide-react';
 
 interface FooterProps {
   lang: Language;
@@ -9,23 +9,6 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeployGuide }) => {
-  const [clickCount, setClickCount] = useState(0);
-
-  const handleSecretAdminTrigger = () => {
-    const next = clickCount + 1;
-    setClickCount(next);
-    if (next >= 3) {
-      setClickCount(0);
-      const current = localStorage.getItem('feigao_admin_mode') === 'true';
-      if (current) {
-        localStorage.removeItem('feigao_admin_mode');
-      } else {
-        localStorage.setItem('feigao_admin_mode', 'true');
-      }
-      window.dispatchEvent(new Event('storage'));
-      window.location.reload();
-    }
-  };
   return (
     <footer className="bg-[#181c20] text-gray-300 pt-12 pb-8 border-t border-gray-800 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -142,7 +125,6 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentTab, onOpenDeplo
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
           <div
-            onClick={handleSecretAdminTrigger}
             title={lang === 'en' ? 'Reading, Bilingualism, and Brain Lab' : '阅读、双语与大脑实验室'}
             className="select-none cursor-default"
           >
